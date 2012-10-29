@@ -30,13 +30,13 @@
 #
 #   class {
 #       ensure  => running,
-#       version => present
+#       version => present,
 #   }
 #------------------------------------------------------------------------------
 class ssh (
 
-    $ensure  = running,
-    $version = present
+    $ensure  = undef,
+    $version = undef,
 
 ) {
 
