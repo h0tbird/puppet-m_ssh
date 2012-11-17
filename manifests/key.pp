@@ -28,19 +28,24 @@
 #   }
 #
 #------------------------------------------------------------------------------
-define ssh::key ($users = undef) {
+define ssh::key (
+
+    $key   = undef,
+    $users = undef,
+
+){
 
     $usrs = regsubst(split(inline_template("<%= name + ',' + users %>"),','), '(^.*)', "${name}/\\1")
-    ssh::key::x { $usrs: key_name => $name }
+    ssh::key::x { $usrs: key => $key }
 }
 
-define ssh::key::x ($key_name) {
+define ssh::key::x ( $key = undef ) {
 
     $user = split($name, '/')
 
     ssh_authorized_key { $name:
         ensure  => present,
-        key     => extlookup("user/${key_name}/key"),
+        key     => $key,
         type    => 'ssh-rsa',
         user    => $user[1],
     }
