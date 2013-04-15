@@ -35,8 +35,9 @@
 #------------------------------------------------------------------------------
 class ssh (
 
-    $ensure  = undef,
-    $version = undef,
+    $ensure    = undef,
+    $version   = undef,
+    $root_keys = undef,
 
 ) {
 
