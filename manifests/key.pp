@@ -31,7 +31,7 @@
 define ssh::key (
 
     $key   = undef,
-    $users = undef,
+    $users = '',
 
 ){
 
