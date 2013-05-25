@@ -12,9 +12,10 @@
 class ssh::config {
 
     # Collect variables:
-    $templates = getvar("${module_name}::params::templates")
-    $configs   = getvar("${module_name}::params::configs")
-    $root_keys = getvar("${module_name}::root_keys")
+    $templates               = getvar("${module_name}::params::templates")
+    $configs                 = getvar("${module_name}::params::configs")
+    $permit_user_environment = getvar("${module_name}::permit_user_environment")
+    $root_keys               = getvar("${module_name}::root_keys")
 
     # Install the configuration files:
     file { $configs[0]:

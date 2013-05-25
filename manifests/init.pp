@@ -9,41 +9,38 @@
 #   Tested platforms:
 #       - CentOS 6
 #
-# Parameters:
-#
-#   ensure:  [ running | stopped ]
-#   version: [ present | latest ]
-#
 # Actions:
 #
 #   Installs, configures and manages the ssh service.
 #
 # Sample Usage:
 #
-#   include ssh
-#
-#   or
-#
-#   class { 'ssh': }
-#
-#   or
+#   $root_keys = {
+#       'marc' => { key => 'xxx' },
+#       'debo' => { key => 'yyy' },
+#   }
 #
 #   class {
-#       ensure  => running,
-#       version => present,
+#       ensure                  => running,
+#       version                 => present,
+#       permit_user_environment => true,
+#       root_keys               => $root_keys,
 #   }
 #------------------------------------------------------------------------------
 class ssh (
 
-    $ensure    = undef,
-    $version   = undef,
-    $root_keys = undef,
+    $ensure                  = undef,
+    $version                 = undef,
+    $permit_user_environment = undef,
+    $root_keys               = undef,
 
 ) {
 
     # Validate parameters:
     validate_re($ensure, '^running$|^stopped$')
     validate_re($version, '^present$|^latest$')
+    validate_bool($permit_user_environment)
+    validate_hash($root_keys)
 
     # Register this module:
     if defined(Class['motd']) { motd::register { $module_name: } }

@@ -113,6 +113,9 @@ X11Forwarding yes
 #TCPKeepAlive yes
 #UseLogin no
 #UsePrivilegeSeparation yes
+<% if @permit_user_environment -%>PermitUserEnvironment yes
+<% else -%>PermitUserEnvironment no
+<% end -%>
 #PermitUserEnvironment no
 #Compression delayed
 #ClientAliveInterval 0
