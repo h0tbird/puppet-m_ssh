@@ -47,6 +47,7 @@ define ssh::key::x ( $key = undef ) {
         ensure  => present,
         key     => $key,
         type    => 'ssh-rsa',
+        options => ["environment=\"SSH_USER=${user[0]}\""],
         user    => $user[1],
     }
 }
