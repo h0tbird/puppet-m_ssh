@@ -15,7 +15,6 @@ class ssh::config {
     $templates               = getvar("${module_name}::params::templates")
     $configs                 = getvar("${module_name}::params::configs")
     $permit_user_environment = getvar("${module_name}::permit_user_environment")
-    #$root_keys               = getvar("${module_name}::root_keys")
 
     # Install the configuration files:
     file { $configs[0]:
@@ -25,8 +24,4 @@ class ssh::config {
         group   => 'root',
         mode    => '0600',
     }
-
-    # Root ssh keys:
-    # $real_keys = concat_titles($root_keys, append, "/root")
-    # create_resources(ssh::key::x, $real_keys)
 }

@@ -31,9 +31,9 @@
 
 define ssh::key ( $key = undef ) {
 
-    $user = split($name, '/')
+    $user = split($title, '/')
 
-    ssh_authorized_key { $name:
+    ssh_authorized_key { $title:
         ensure  => present,
         key     => $key,
         type    => 'ssh-rsa',
