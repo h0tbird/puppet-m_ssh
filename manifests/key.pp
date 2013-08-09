@@ -11,35 +11,25 @@
 #
 # Parameters:
 #
-#   title: [ string ]
-#   users: [ array of strings ]
+#   title: [ keyowner/user ]
+#   key:   [ string ]
 #
 # Actions:
 #
-#   Given a user name (title) and a list of user names (users), it will append
-#   the user's ssh public key to the ~/.ssh/authorized_keys file of each user.
-#   The sample below will allow anyone using the key 'marc.villacorta' to
-#   access the system as user 'marc.villacorta', 'deborah.aguilar' or 'root'.
+#   Given 'keyowner/user', it will append 'key' to ~/.ssh/authorized_keys
+#   of 'user'. In the sample below, the key owned by 'marc.villacorta' will be
+#   appended to the root's authorized_keys file. SSH_USER will be set to the
+#   owners ID 'marc.villacorta'.
 #
 # Sample Usage:
 #
-#   ssh::key { 'marc.villacorta':
-#       users => ['deborah.aguilar','root']
+#   ssh::key { 'marc.villacorta/root':
+#       key => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQD4F..',
 #   }
 #
 #------------------------------------------------------------------------------
-define ssh::key (
 
-    $key   = undef,
-    $users = '',
-
-){
-
-    $usrs = regsubst(split(inline_template("<%= name + ',' + users %>"),','), '(^.*)', "${name}/\\1")
-    ssh::key::x { $usrs: key => $key }
-}
-
-define ssh::key::x ( $key = undef ) {
+define ssh::key ( $key = undef ) {
 
     $user = split($name, '/')
 

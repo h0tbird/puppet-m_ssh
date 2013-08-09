@@ -15,16 +15,10 @@
 #
 # Sample Usage:
 #
-#   $root_keys = {
-#       'marc' => { key => 'xxx' },
-#       'debo' => { key => 'yyy' },
-#   }
-#
 #   class {
 #       ensure                  => running,
 #       version                 => present,
 #       permit_user_environment => true,
-#       root_keys               => $root_keys,
 #   }
 #------------------------------------------------------------------------------
 class ssh (
@@ -32,7 +26,6 @@ class ssh (
     $ensure                  = undef,
     $version                 = undef,
     $permit_user_environment = undef,
-    $root_keys               = undef,
 
 ) {
 
@@ -40,7 +33,6 @@ class ssh (
     validate_re($ensure, '^running$|^stopped$')
     validate_re($version, '^present$|^latest$')
     validate_bool($permit_user_environment)
-    validate_hash($root_keys)
 
     # Register this module:
     if defined(Class['motd']) { motd::register { $module_name: } }
