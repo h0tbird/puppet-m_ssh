@@ -15,6 +15,7 @@ class ssh::config {
     $templates               = getvar("${module_name}::params::templates")
     $configs                 = getvar("${module_name}::params::configs")
     $permit_user_environment = getvar("${module_name}::permit_user_environment")
+    $use_dns                 = getvar("${module_name}::use_dns")
 
     # Install the configuration files:
     file { $configs[0]:

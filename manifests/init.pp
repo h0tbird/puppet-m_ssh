@@ -26,6 +26,7 @@ class ssh (
     $ensure                  = undef,
     $version                 = undef,
     $permit_user_environment = undef,
+    $use_dns                 = undef,
 
 ) {
 
@@ -33,6 +34,7 @@ class ssh (
     validate_re($ensure, '^running$|^stopped$')
     validate_re($version, '^present$|^latest$')
     validate_bool($permit_user_environment)
+    validate_re($use_dns, '^yes$|^no$')
 
     # Register this module:
     if defined(Class['motd']) { motd::register { $module_name: } }
