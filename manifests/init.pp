@@ -7,7 +7,7 @@
 #   2011-11-19
 #
 #   Tested platforms:
-#       - CentOS 6
+#       - CentOS 6/7
 #
 # Actions:
 #
@@ -19,14 +19,15 @@
 #     ensure                  => running,
 #     version                 => present,
 #     permit_user_environment => true,
+#     use_dns                 => 'no',
 #   }
 #------------------------------------------------------------------------------
 class ssh (
 
   $ensure                  = undef,
   $version                 = undef,
-  $permit_user_environment = undef,
-  $use_dns                 = undef,
+  $permit_user_environment = 'no',
+  $use_dns                 = 'yes',
 
 ) {
 
