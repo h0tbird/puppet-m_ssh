@@ -39,11 +39,9 @@ class ssh (
   # Register this module:
   if defined(Class['motd']) { motd::register { $module_name: } }
 
-  # Set the requirements:
-  anchor { "${module_name}::begin":   } ->
-  class  { "${module_name}::params":  } ->
-  class  { "${module_name}::install": } ->
-  class  { "${module_name}::config":  } ~>
-  class  { "${module_name}::service": } ->
-  anchor { "${module_name}::end":     }
+  # Module contention:
+  contain "::${module_name}::params"
+  contain "::${module_name}::install"
+  contain "::${module_name}::config"
+  contain "::${module_name}::service"
 }
