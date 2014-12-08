@@ -12,8 +12,8 @@
 class ssh::service {
 
   # Collect variables:
-  $ensure   = getvar("${module_name}::ensure")
-  $services = getvar("${module_name}::params::services")
+  $ensure   = getvar("::${module_name}::ensure")
+  $services = getvar("::${module_name}::params::services")
 
   # Start or stop the service:
   service { $services:
