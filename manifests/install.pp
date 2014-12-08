@@ -11,10 +11,10 @@
 #------------------------------------------------------------------------------
 class ssh::install {
 
-    # Collect variables:
-    $version  = getvar("${module_name}::version")
-    $packages = getvar("${module_name}::params::packages")
+  # Collect variables:
+  $version  = getvar("${module_name}::version")
+  $packages = getvar("${module_name}::params::packages")
 
-    # Install the package/s:
-    package { $packages: ensure => $version }
+  # Install the package/s:
+  package { $packages: ensure => $version }
 }

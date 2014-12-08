@@ -11,16 +11,16 @@
 #------------------------------------------------------------------------------
 class ssh::service {
 
-    # Collect variables:
-    $ensure   = getvar("${module_name}::ensure")
-    $services = getvar("${module_name}::params::services")
+  # Collect variables:
+  $ensure   = getvar("${module_name}::ensure")
+  $services = getvar("${module_name}::params::services")
 
-    # Start or stop the service:
-    service { $services:
-        ensure  => $ensure,
-        enable  => $ensure ? {
-            'running' => true,
-            'stopped' => false,
-        }
+  # Start or stop the service:
+  service { $services:
+    ensure  => $ensure,
+    enable  => $ensure ? {
+      'running' => true,
+      'stopped' => false,
     }
+  }
 }

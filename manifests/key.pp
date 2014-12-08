@@ -24,20 +24,20 @@
 # Sample Usage:
 #
 #   ssh::key { 'marc.villacorta/root':
-#       key => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQD4F..',
+#     key => 'AAAAB3NzaC1yc2EAAAADAQABAAABAQD4F..',
 #   }
 #
 #------------------------------------------------------------------------------
 
 define ssh::key ( $key = undef ) {
 
-    $user = split($title, '/')
+  $user = split($title, '/')
 
-    ssh_authorized_key { $title:
-        ensure  => present,
-        key     => $key,
-        type    => 'ssh-rsa',
-        options => ["environment=\"SSH_USER=${user[0]}\""],
-        user    => $user[1],
-    }
+  ssh_authorized_key { $title:
+    ensure  => present,
+    key     => $key,
+    type    => 'ssh-rsa',
+    options => ["environment=\"SSH_USER=${user[0]}\""],
+    user    => $user[1],
+  }
 }

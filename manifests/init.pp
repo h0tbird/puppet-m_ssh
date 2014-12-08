@@ -16,34 +16,34 @@
 # Sample Usage:
 #
 #   class {
-#       ensure                  => running,
-#       version                 => present,
-#       permit_user_environment => true,
+#     ensure                  => running,
+#     version                 => present,
+#     permit_user_environment => true,
 #   }
 #------------------------------------------------------------------------------
 class ssh (
 
-    $ensure                  = undef,
-    $version                 = undef,
-    $permit_user_environment = undef,
-    $use_dns                 = undef,
+  $ensure                  = undef,
+  $version                 = undef,
+  $permit_user_environment = undef,
+  $use_dns                 = undef,
 
 ) {
 
-    # Validate parameters:
-    validate_re($ensure, '^running$|^stopped$')
-    validate_re($version, '^present$|^latest$')
-    validate_bool($permit_user_environment)
-    validate_re($use_dns, '^yes$|^no$')
+  # Validate parameters:
+  validate_re($ensure, '^running$|^stopped$')
+  validate_re($version, '^present$|^latest$')
+  validate_bool($permit_user_environment)
+  validate_re($use_dns, '^yes$|^no$')
 
-    # Register this module:
-    if defined(Class['motd']) { motd::register { $module_name: } }
+  # Register this module:
+  if defined(Class['motd']) { motd::register { $module_name: } }
 
-    # Set the requirements:
-    anchor { "${module_name}::begin":   } ->
-    class  { "${module_name}::params":  } ->
-    class  { "${module_name}::install": } ->
-    class  { "${module_name}::config":  } ~>
-    class  { "${module_name}::service": } ->
-    anchor { "${module_name}::end":     }
+  # Set the requirements:
+  anchor { "${module_name}::begin":   } ->
+  class  { "${module_name}::params":  } ->
+  class  { "${module_name}::install": } ->
+  class  { "${module_name}::config":  } ~>
+  class  { "${module_name}::service": } ->
+  anchor { "${module_name}::end":     }
 }

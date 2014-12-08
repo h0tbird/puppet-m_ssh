@@ -11,18 +11,18 @@
 #------------------------------------------------------------------------------
 class ssh::config {
 
-    # Collect variables:
-    $templates               = getvar("${module_name}::params::templates")
-    $configs                 = getvar("${module_name}::params::configs")
-    $permit_user_environment = getvar("${module_name}::permit_user_environment")
-    $use_dns                 = getvar("${module_name}::use_dns")
+  # Collect variables:
+  $templates               = getvar("${module_name}::params::templates")
+  $configs                 = getvar("${module_name}::params::configs")
+  $permit_user_environment = getvar("${module_name}::permit_user_environment")
+  $use_dns                 = getvar("${module_name}::use_dns")
 
-    # Install the configuration files:
-    file { $configs[0]:
-        ensure  => present,
-        content => template("${templates}/sshd_config.erb"),
-        owner   => 'root',
-        group   => 'root',
-        mode    => '0600',
-    }
+  # Install the configuration files:
+  file { $configs[0]:
+    ensure  => present,
+    content => template("${templates}/sshd_config.erb"),
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0600',
+  }
 }
