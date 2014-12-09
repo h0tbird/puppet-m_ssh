@@ -40,6 +40,7 @@ class ssh (
   $server_gss_api_authentication            = $::ssh::params::server_gss_api_authentication,
   $server_gss_api_cleanup_credentials       = $::ssh::params::server_gss_api_cleanup_credentials,
   $server_host_key                          = $::ssh::params::server_host_key,
+  $server_log_level                         = $::ssh::params::server_log_level,
   $server_password_authentication           = $::ssh::params::server_password_authentication,
   $server_permit_user_environment           = $::ssh::params::server_permit_user_environment,
   $server_subsystem                         = $::ssh::params::server_subsystem,

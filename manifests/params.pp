@@ -53,6 +53,7 @@ class ssh::params {
   $server_gss_api_authentication = 'yes'
   $server_gss_api_cleanup_credentials = 'yes'
   $server_host_key = ['/etc/ssh/ssh_host_ecdsa_key','/etc/ssh/ssh_host_rsa_key']
+  $server_log_level = 'INFO'
   $server_password_authentication = 'yes'
   $server_permit_user_environment = 'no'
   $server_subsystem = 'sftp /usr/libexec/openssh/sftp-server'

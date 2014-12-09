@@ -12,6 +12,8 @@
 <% end -%>
 <% @server_host_key.each do |i| -%>HostKey <%= i %>
 <% end -%>
+<% if @server_log_level -%>LogLevel <%= @server_log_level %>
+<% end -%>
 <% if @server_password_authentication -%>PasswordAuthentication <%= @server_password_authentication %>
 <% end -%>
 <% if @server_permit_user_environment -%>PermitUserEnvironment <%= @server_permit_user_environment %>
