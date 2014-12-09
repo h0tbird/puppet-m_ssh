@@ -15,34 +15,67 @@
 #
 # Sample Usage:
 #
-#   class {
-#     ensure                  => running,
-#     version                 => present,
-#     permit_user_environment => true,
-#     use_dns                 => 'no',
+#   class { ssh:
+#     ensure  => running,
+#     version => latest,
+#     roles   => ['client','server'],
 #   }
 #------------------------------------------------------------------------------
 class ssh (
 
-  $ensure                  = undef,
-  $version                 = undef,
-  $permit_user_environment = 'no',
-  $use_dns                 = 'yes',
+  # Global parameters:
+  $ensure  = $::ssh::params::ensure,
+  $version = $::ssh::params::version,
+  $roles   = $::ssh::params::roles,
 
-) {
+  # Client parameters:
 
-  # Validate parameters:
+
+  # Server parameters:
+  $server_accept_env                        = $::ssh::params::server_accept_env,
+  $server_authorized_keys_file              = $::ssh::params::server_authorized_keys_file,
+  $server_challenge_response_authentication = $::ssh::params::server_challenge_response_authentication,
+  $server_gss_api_authentication            = $::ssh::params::server_gss_api_authentication,
+  $server_gss_api_cleanup_credentials       = $::ssh::params::server_gss_api_cleanup_credentials,
+  $server_host_key                          = $::ssh::params::server_host_key,
+  $server_password_authentication           = $::ssh::params::server_password_authentication,
+  $server_permit_user_environment           = $::ssh::params::server_permit_user_environment,
+  $server_subsystem                         = $::ssh::params::server_subsystem,
+  $server_syslog_facility                   = $::ssh::params::server_syslog_facility,
+  $server_use_dns                           = $::ssh::params::server_use_dns,
+  $server_use_pam                           = $::ssh::params::server_use_pam,
+  $server_use_privilege_separation          = $::ssh::params::server_use_privilege_separation,
+  $server_x11_forwarding                    = $::ssh::params::server_x11_forwarding,
+
+) inherits ssh::params {
+
+  # Validate global parameters:
   validate_re($ensure, '^running$|^stopped$')
   validate_re($version, '^present$|^latest$')
-  validate_bool($permit_user_environment)
-  validate_re($use_dns, '^yes$|^no$')
+  validate_array($roles)
 
-  # Register this module:
-  if defined(Class['motd']) { motd::register { $module_name: } }
+  # Validate client parameters:
+  #if 'client' in $roles {
+  #}
+
+  # Validate server parameters:
+  if 'server' in $roles {
+    validate_array($server_accept_env)
+    validate_re($server_challenge_response_authentication, '^yes$|^no$')
+    validate_re($server_gss_api_authentication, '^yes$|^no$')
+    validate_re($server_gss_api_cleanup_credentials, '^yes$|^no$')
+    validate_array($server_host_key)
+    validate_re($server_password_authentication, '^yes$|^no$')
+    validate_re($server_permit_user_environment, '^yes$|^no$')
+    validate_re($server_use_dns, '^yes$|^no$')
+    validate_re($server_use_pam, '^yes$|^no$')
+    validate_re($server_x11_forwarding, '^yes$|^no$')
+  }
 
   # Module contention:
-  contain "::${module_name}::params"
-  contain "::${module_name}::install"
-  contain "::${module_name}::config"
-  contain "::${module_name}::service"
+  $roles.each |$role| {
+    contain "::${module_name}::install::${role}"
+    contain "::${module_name}::config::${role}"
+    contain "::${module_name}::service::${role}"
+  }
 }

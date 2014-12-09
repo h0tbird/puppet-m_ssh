@@ -1,5 +1,5 @@
 #------------------------------------------------------------------------------
-# Class: ssh::service
+# Class: ssh::service::server
 #
 #   This class is part of the ssh module.
 #   You should not be calling this class.
@@ -9,18 +9,15 @@
 #   2011-11-19
 #
 #------------------------------------------------------------------------------
-class ssh::service {
+class ssh::service::server inherits ssh {
 
-  # Collect variables:
-  $ensure   = getvar("::${module_name}::ensure")
-  $services = getvar("::${module_name}::params::services")
-
-  # Start or stop the service:
-  service { $services:
-    ensure  => $ensure,
-    enable  => $ensure ? {
-      'running' => true,
-      'stopped' => false,
+  if !empty($server_services) {
+    service { $server_services:
+      ensure  => $ensure,
+      enable  => $ensure ? {
+        'running' => true,
+        'stopped' => false,
+      }
     }
   }
 }

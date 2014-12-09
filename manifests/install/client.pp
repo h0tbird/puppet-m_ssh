@@ -1,5 +1,5 @@
 #------------------------------------------------------------------------------
-# Class: ssh::install
+# Class: ssh::install::client
 #
 #   This class is part of the ssh module.
 #   You should not be calling this class.
@@ -9,12 +9,12 @@
 #   2011-11-19
 #
 #------------------------------------------------------------------------------
-class ssh::install {
+class ssh::install::client inherits ssh {
 
-  # Collect variables:
-  $version  = getvar("::${module_name}::version")
-  $packages = getvar("::${module_name}::params::packages")
-
-  # Install the package/s:
-  package { $packages: ensure => $version }
+  if !empty($client_packages) {
+    package { $client_packages:
+      ensure => $version,
+      before => File[$client_configs],
+    }
+  }
 }
