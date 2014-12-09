@@ -24,7 +24,7 @@ class ssh::params {
       $client_configs  = ['/etc/ssh/ssh_config']
       $client_services = []
 
-      $server_packages = ['openssh','openssh-server','libssh2']
+      $server_packages = ['openssh-server']
       $server_configs  = ['/etc/ssh/sshd_config']
       $server_services = ['sshd']
     }
