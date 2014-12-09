@@ -1,30 +1,30 @@
 # This file is managed by Puppet
 
-<% @server_accept_env.each do |i| -%>  AcceptEnv <%= i %>
+<% @server_accept_env.each do |i| -%>AcceptEnv <%= i %>
 <% end -%>
-<% if @server_authorized_keys_file -%>  AuthorizedKeysFile <%= @server_authorized_keys_file %>
+<% if @server_authorized_keys_file -%>AuthorizedKeysFile <%= @server_authorized_keys_file %>
 <% end -%>
-<% if @server_challenge_response_authentication -%>  ChallengeResponseAuthentication <%= @server_challenge_response_authentication %>
+<% if @server_challenge_response_authentication -%>ChallengeResponseAuthentication <%= @server_challenge_response_authentication %>
 <% end -%>
-<% if @server_gss_api_authentication -%>  GSSAPIAuthentication <%= @server_gss_api_authentication %>
+<% if @server_gss_api_authentication -%>GSSAPIAuthentication <%= @server_gss_api_authentication %>
 <% end -%>
-<% if @server_gss_api_cleanup_credentials -%>  GSSAPICleanupCredentials <%= @server_gss_api_cleanup_credentials %>
+<% if @server_gss_api_cleanup_credentials -%>GSSAPICleanupCredentials <%= @server_gss_api_cleanup_credentials %>
 <% end -%>
-<% @server_host_key.each do |i| -%>  HostKey <%= i %>
+<% @server_host_key.each do |i| -%>HostKey <%= i %>
 <% end -%>
-<% if @server_password_authentication -%>  PasswordAuthentication <%= @server_password_authentication %>
+<% if @server_password_authentication -%>PasswordAuthentication <%= @server_password_authentication %>
 <% end -%>
-<% if @server_permit_user_environment -%>  PermitUserEnvironment <%= @server_permit_user_environment %>
+<% if @server_permit_user_environment -%>PermitUserEnvironment <%= @server_permit_user_environment %>
 <% end -%>
-<% if @server_subsystem -%>  Subsystem <%= @server_subsystem %>
+<% if @server_subsystem -%>Subsystem <%= @server_subsystem %>
 <% end -%>
-<% if @server_syslog_facility -%>  SyslogFacility <%= @server_syslog_facility %>
+<% if @server_syslog_facility -%>SyslogFacility <%= @server_syslog_facility %>
 <% end -%>
-<% if @server_use_dns -%>  UseDNS <%= @server_use_dns %>
+<% if @server_use_dns -%>UseDNS <%= @server_use_dns %>
 <% end -%>
-<% if @server_use_pam -%>  UsePAM <%= @server_use_pam %>
+<% if @server_use_pam -%>UsePAM <%= @server_use_pam %>
 <% end -%>
-<% if @server_use_privilege_separation -%>  UsePrivilegeSeparation <%= @server_use_privilege_separation %>
+<% if @server_use_privilege_separation -%>UsePrivilegeSeparation <%= @server_use_privilege_separation %>
 <% end -%>
-<% if @server_x11_forwarding -%>  X11Forwarding <%= @server_x11_forwarding %>
+<% if @server_x11_forwarding -%>X11Forwarding <%= @server_x11_forwarding %>
 <% end -%>
