@@ -29,7 +29,9 @@ class ssh (
   $roles   = $::ssh::params::roles,
 
   # Client parameters:
-
+  $client_gss_api_authentication = $::ssh::params::client_gss_api_authentication,
+  $client_forward_x11_trusted    = $::ssh::params::client_forward_x11_trusted,
+  $client_send_env               = $::ssh::params::client_send_env,
 
   # Server parameters:
   $server_accept_env                        = $::ssh::params::server_accept_env,
@@ -55,8 +57,11 @@ class ssh (
   validate_array($roles)
 
   # Validate client parameters:
-  #if 'client' in $roles {
-  #}
+  if 'client' in $roles {
+    validate_re($client_gss_api_authentication, '^yes$|^no$')
+    validate_re($client_forward_x11_trusted, '^yes$|^no$')
+    validate_array($client_send_env)
+  }
 
   # Validate server parameters:
   if 'server' in $roles {

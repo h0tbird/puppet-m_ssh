@@ -33,28 +33,32 @@ class ssh::params {
   }
 
   # Module defaults:
-  $ensure  = 'running'
+  $ensure = 'running'
   $version = 'present'
-  $roles   = ['client','server']
+  $roles = ['client','server']
 
   # Client defaults:
+  $client_gss_api_authentication = 'yes'
+  $client_forward_x11_trusted = 'yes'
+  $client_send_env = ['LANG LC_CTYPE LC_NUMERIC LC_TIME LC_COLLATE LC_MONETARY LC_MESSAGES',
+  'LC_PAPER LC_NAME LC_ADDRESS LC_TELEPHONE LC_MEASUREMENT',
+  'LC_IDENTIFICATION LC_ALL LANGUAGE', 'XMODIFIERS']
 
   # Server defaults:
-  $server_accept_env                        = ['LANG LC_CTYPE LC_NUMERIC LC_TIME LC_COLLATE LC_MONETARY LC_MESSAGES',
-                                               'LC_IDENTIFICATION LC_ALL LANGUAGE',
-                                               'LC_PAPER LC_NAME LC_ADDRESS LC_TELEPHONE LC_MEASUREMENT',
-                                               'XMODIFIERS']
-  $server_authorized_keys_file              = '.ssh/authorized_keys'
+  $server_accept_env = ['LANG LC_CTYPE LC_NUMERIC LC_TIME LC_COLLATE LC_MONETARY LC_MESSAGES',
+  'LC_IDENTIFICATION LC_ALL LANGUAGE',
+  'LC_PAPER LC_NAME LC_ADDRESS LC_TELEPHONE LC_MEASUREMENT', 'XMODIFIERS']
+  $server_authorized_keys_file = '.ssh/authorized_keys'
   $server_challenge_response_authentication = 'no'
-  $server_gss_api_authentication            = 'yes'
-  $server_gss_api_cleanup_credentials       = 'yes'
-  $server_host_key                          = ['/etc/ssh/ssh_host_ecdsa_key','/etc/ssh/ssh_host_rsa_key']
-  $server_password_authentication           = 'yes'
-  $server_permit_user_environment           = 'no'
-  $server_subsystem                         = 'sftp	/usr/libexec/openssh/sftp-server'
-  $server_syslog_facility                   = 'AUTHPRIV'
-  $server_use_dns                           = 'yes'
-  $server_use_pam                           = 'yes'
-  $server_use_privilege_separation          = 'sandbox'
-  $server_x11_forwarding                    = 'yes'
+  $server_gss_api_authentication = 'yes'
+  $server_gss_api_cleanup_credentials = 'yes'
+  $server_host_key = ['/etc/ssh/ssh_host_ecdsa_key','/etc/ssh/ssh_host_rsa_key']
+  $server_password_authentication = 'yes'
+  $server_permit_user_environment = 'no'
+  $server_subsystem = 'sftp /usr/libexec/openssh/sftp-server'
+  $server_syslog_facility = 'AUTHPRIV'
+  $server_use_dns = 'yes'
+  $server_use_pam = 'yes'
+  $server_use_privilege_separation = 'sandbox'
+  $server_x11_forwarding = 'yes'
 }
