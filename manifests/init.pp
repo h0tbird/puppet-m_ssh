@@ -7,7 +7,7 @@
 #   2011-11-19
 #
 #   Tested platforms:
-#       - CentOS 6/7
+#       - CentOS 6 and 7
 #
 # Actions:
 #
